@@ -14,6 +14,6 @@ A solução utiliza uma abordagem híbrida (Python + n8n):
 
 📁 Estrutura de Arquivos
 
-1- extrair_pdf.py       # Script Python responsável por ler o PDF e gerar o JSON
+1- disparador.py       # Script Python responsável por ler o PDF e gerar o JSON
 2- relatorio_ferias.pdf # Arquivo PDF de entrada (Relatório do RH)
-3- workflow_n8n.json    # Fluxo exportado do n8n para importação direta
+3- fluxo_disparador.json    # Fluxo exportado do n8n para importação direta
