@@ -3,6 +3,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import pdfplumber
+import pathlib
 
 
 SMTP_SERVER = "smtp.gmail.com"
@@ -55,8 +56,13 @@ if funcionarios_para_notificar:
         Atenciosamente,
         Equipe de TI
         """
+        pasta = pathlib.Path(r'assets')
+        caminho = str(pasta.resolve())
+        msg.Attachments.Add(caminho)
         msg.attach(MIMEText(corpo, "plain"))
+        
         server.send_message(msg)
+        
 
     server.quit()
     print(f"Sucesso: {len(funcionarios_para_notificar)} e-mails enviados.")
