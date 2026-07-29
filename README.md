@@ -8,6 +8,7 @@ Sistema de automação desenhado para identificar colaboradores que estão prest
 A solução utiliza uma abordagem híbrida (Python + n8n):
 
 1. Leitura e Extração (Python): O script em Python lê o relatório mensal em PDF, extrai os dados das tabelas e transforma os registros em um ETL para diagnosticar e enviar os emails após analise.
+2. Notificar o encarregado de mudar a senha do colaborador para a senha padrão, assim já ficando ciente que talvez o colaborar esqueça da senha padrão ou esqueça de trocar e já ter preparado previamente os dados para alteração do colaborar em questão.
 
 
 
