@@ -7,8 +7,8 @@ Sistema de automação desenhado para identificar colaboradores que estão prest
 
 A solução utiliza uma abordagem híbrida (Python + n8n):
 
-1. Leitura e Extração (Python): O script em Python lê o relatório mensal em PDF, extrai os dados das tabelas e transforma os registros em uma estrutura JSON tratada.
-2. Orquestração e Disparo (n8n): O n8n executa o agendamento diário (Cron), recebe o JSON, valida a data de retorno (filtrando quem volta exatamente no dia seguinte) e dispara o e-mail personalizado através da API do provedor (Gmail / Outlook / SMTP).
+1. Leitura e Extração (Python): O script em Python lê o relatório mensal em PDF, extrai os dados das tabelas e transforma os registros em um ETL para diagnosticar e enviar os emails após analise.
+
 
 
 
@@ -16,4 +16,4 @@ A solução utiliza uma abordagem híbrida (Python + n8n):
 
 1- disparador.py       # Script Python responsável por ler o PDF e gerar o JSON
 2- relatorio_ferias.pdf # Arquivo PDF de entrada (Relatório do RH)
-3- fluxo_disparador.json    # Fluxo exportado do n8n para importação direta
+
