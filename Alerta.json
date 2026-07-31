@@ -1,0 +1,102 @@
+{
+  "name": "Alerta Retorno Férias - TI",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "46a5a3fd-81b3-442b-9b95-f896f12510a5",
+      "name": "Schedule Trigger (08:00)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "command": "python3 /caminho/para/extrair_pdf.py"
+      },
+      "id": "893e6147-eaf2-4396-9561-55722361baac",
+      "name": "Executar Script Python",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.data_retorno }}",
+              "value2": "={{ $today.plus({ days: 1 }).toFormat('dd/MM/yyyy') }}"
+            }
+          ]
+        }
+      },
+      "id": "3067d389-bb24-4dbe-94da-c09b8e2d40d4",
+      "name": "Volta Amanhã?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "⚠️ [Lembrete TI] Seu retorno das férias é amanhã - Atualização de Senha",
+        "emailType": "text",
+        "message": "=Olá {{ $json.nome }},\n\nEsperamos que tenha aproveitado o seu período de descanso!\n\nLembramos que o seu retorno ao trabalho está agendado para amanhã.\n\nPor motivos de segurança, a sua senha corporativa foi alterada temporariamente para: SuaEmpresa@2026\n\nPor favor, realize a redefinição de senha no seu primeiro acesso.\n\nAtenciosamente,\nEquipe de TI",
+        "options": {}
+      },
+      "id": "c24c9c37-1dcb-47ba-b2d1-ec7d29d957e7",
+      "name": "Enviar E-mail de Alerta",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        -32
+      ],
+      "webhookId": "7b5ba079-ddfa-43ff-b77a-1f93b742a985"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Volta Amanhã?": {
+      "main": [
+        [
+          {
+            "node": "Enviar E-mail de Alerta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "551a07af-12a0-4198-93dc-bffe3be4a3c6",
+  "meta": {
+    "instanceId": "9557d7bad4ef89c0ae95645c6b7eca3c7eec3d5bcbd519581bff4d7b47303f38"
+  },
+  "nodeGroups": [],
+  "id": "KwTrsNLptyvZ9Wab",
+  "tags": []
+}
