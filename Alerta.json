@@ -68,13 +68,51 @@
       "typeVersion": 2.1,
       "position": [
         208,
-        -32
-      ],
-      "webhookId": "7b5ba079-ddfa-43ff-b77a-1f93b742a985"
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "colaborador@empresa.com",
+        "subject": "=📋 [Aviso TI] Retorno de Férias: {{ $json.nome }}",
+        "emailType": "text",
+        "message": "=Aviso Interno de TI:\n\nO colaborador {{ $json.nome }} ({{ $json.email }}) retorna das férias amanhã ({{ $json.data_retorno }}).\n\nO e-mail de lembrete com a senha temporária já foi disparado.",
+        "options": {}
+      },
+      "id": "5fa23d11-1234-5678-90ab-cdef12345678",
+      "name": "Notificação para TI",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        100
+      ]
     }
   ],
   "pinData": {},
   "connections": {
+    "Schedule Trigger (08:00)": {
+      "main": [
+        [
+          {
+            "node": "Executar Script Python",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Executar Script Python": {
+      "main": [
+        [
+          {
+            "node": "Volta Amanhã?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Volta Amanhã?": {
       "main": [
         [
@@ -82,21 +120,14 @@
             "node": "Enviar E-mail de Alerta",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Notificação para TI",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     }
-  },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate"
-  },
-  "versionId": "551a07af-12a0-4198-93dc-bffe3be4a3c6",
-  "meta": {
-    "instanceId": "9557d7bad4ef89c0ae95645c6b7eca3c7eec3d5bcbd519581bff4d7b47303f38"
-  },
-  "nodeGroups": [],
-  "id": "KwTrsNLptyvZ9Wab",
-  "tags": []
+  }
 }
